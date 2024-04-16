@@ -12,11 +12,14 @@ inquirer
   ])
   .then((answers) => {
     const answerUrl = answers.URL;
+
+    var qr_svg = qr.image(answerUrl);
+    qr_svg.pipe(fs.createWriteStream("qr_img.png"));
   })
   .catch((error) => {
     if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
+      console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      // Something else went wrong
+      console.log("Something else went wrong");
     }
   });
